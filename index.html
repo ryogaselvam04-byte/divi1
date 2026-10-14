@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd1dc, #ffc0cb, #ffb6c1);
+  font-family: "Aboreto", system-ui, sans-serif;
+  perspective: 1200px;
+  overflow: hidden;
+}
+
+/* 🎡 Carousel */
+.container {
+  width: min(90vw, 340px);
+  aspect-ratio: 1 / 1;
+  transform-style: preserve-3d;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate 35s linear infinite;
+}
+
+.card-wrapper {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: 70%;
+  aspect-ratio: 9 / 16;
+}
+
+.card-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+/* ✅ Six Photos Only */
+.card-wrapper:nth-child(1) {
+  transform: rotateY(0deg) translateZ(260px);
+}
+
+.card-wrapper:nth-child(2) {
+  transform: rotateY(60deg) translateZ(260px);
+}
+
+.card-wrapper:nth-child(3) {
+  transform: rotateY(120deg) translateZ(260px);
+}
+
+.card-wrapper:nth-child(4) {
+  transform: rotateY(180deg) translateZ(260px);
+}
+
+.card-wrapper:nth-child(5) {
+  transform: rotateY(240deg) translateZ(260px);
+}
+
+.card-wrapper:nth-child(6) {
+  transform: rotateY(300deg) translateZ(260px);
+}
+
+@keyframes rotate {
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+/* 💕 Floating Emojis */
+.emoji {
+  position: fixed;
+  bottom: -30px;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 5;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-110vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* 🎉 Surprise Button */
+.btn {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ff4d6d, #ff85a2);
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* 💌 Popup Background */
+.card-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 20;
+}
+
+/* 💳 Birthday Card */
+.card {
+  width: min(300px, 85vw);
+  height: min(420px, 75vh);
+  min-height: 300px;
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.8s;
+  padding: 22px;
+  text-align: center;
+}
+
+/* Front Side */
+.card-front {
+  background: linear-gradient(45deg, #ff85a2, #ff4d6d);
+  color: white;
+  font-size: 16px;
+}
+
+/* ✅ Fixed White Box and Text Overflow */
+.card-back {
+  background: white;
+  color: #ff4d6d;
+  transform: rotateY(180deg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 22px 18px;
+}
+
+/* Text stays inside the white card */
+#typingText {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: auto 0;
+  font-size: clamp(10px, 2.8vw, 12px);
+  line-height: 1.8;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Flip Animation */
+.card.open .card-front {
+  transform: rotateY(180deg);
+}
+
+.card.open .card-back {
+  transform: rotateY(360deg);
+}
+
+/* 📱 Small Screen Adjustment */
+@media (max-width: 380px) {
+  .card {
+    width: 270px;
+    height: min(400px, 72vh);
+  }
+
+  .card-back {
+    padding: 18px 15px;
+  }
+
+  #typingText {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎡 Rotating Carousel: 6 Photos -->
+<div class="container">
+  <div class="inner">
+
+    <div class="card-wrapper">
+      <img src="https://i.postimg.cc/ZYvK5JWw/8f854f82-aff3-441f-8485-d805151dfe44.jpg" alt="Birthday memory 1">
+    </div>
+
+    <div class="card-wrapper">
+      <img src="https://i.postimg.cc/nr98VVTj/93d1b4ed-0082-4548-a0b4-8c11ca90f24f.jpg" alt="Birthday memory 2">
+    </div>
+
+    <div class="card-wrapper">
+      <img src="https://i.postimg.cc/c1zZp2TM/8820ea4a-c53c-412f-b82c-746285e09cb9.jpg" alt="Birthday memory 3">
+    </div>
+
+    <div class="card-wrapper">
+      <img src="https://i.postimg.cc/tgzp8gm0/cc45c1ff-7def-4941-b99c-8bd66962c75a.jpg" alt="Birthday memory 4">
+    </div>
+
+    <div class="card-wrapper">
+      <img src="https://i.postimg.cc/sxLVK0H5/1ef692b7-df55-4b3b-9653-48c13e550521.jpg" alt="Birthday memory 5">
+    </div>
+
+    <div class="card-wrapper">
+      <img src="https://i.postimg.cc/Zq6CnZst/459f07e2-b86b-4001-ba9e-feb1d345ba24.jpg" alt="Birthday memory 6">
+    </div>
+
+  </div>
+</div>
+
+<!-- 🎉 Surprise Button -->
+<button class="btn" onclick="showWish()">
+  Click for Surprise 🎉
+</button>
+
+<!-- 💌 Birthday Popup -->
+<div class="card-popup" id="cardPopup">
+
+  <div class="card" id="card">
+
+    <div class="card-front">
+      💖 Click to Open 💖
+    </div>
+
+    <div class="card-back">
+      <p id="typingText"></p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 🎵 Background Music -->
+<audio
+  id="bg-music"
+  src="https://files.catbox.moe/8whteu.mp3"
+  loop>
+</audio>
+
+<script>
+
+/* 🎵 Background Music */
+const music = document.getElementById("bg-music");
+
+function playMusic() {
+  music.play().catch(() => {});
+}
+
+document.body.addEventListener("click", playMusic, {
+  once: true
+});
+
+/* 💕 Floating Emojis */
+const emojis = [
+  "💖", "✨", "🌸", "🎀", "💗", "💓", "💞",
+  "❣️", "💝", "💘", "🩷", "🧡", "💛",
+  "💚", "💙", "🩵", "💜", "🤍"
+];
+
+function createEmoji() {
+  const e = document.createElement("div");
+
+  e.className = "emoji";
+  e.innerText = emojis[
+    Math.floor(Math.random() * emojis.length)
+  ];
+
+  e.style.left = Math.random() * 100 + "vw";
+  e.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+  document.body.appendChild(e);
+
+  setTimeout(() => e.remove(), 6000);
+}
+
+setInterval(createEmoji, 400);
+
+/* 💌 Birthday Message */
+const message = `Happy birthday Divi💖
+
+Un day romba special-aa irukanum, full-aa happiness, smiles, and lovely moments-oda niraiyirukanum.
+
+Nee eppovume ippadiye sweet-aa, strong-aa, happy-aa irukanum.
+
+Un dreams ellam nijamaaganum.
+
+Stay blessed and keep smiling always! ✨🌸`;
+
+let i = 0;
+let typingStarted = false;
+let typingTimer = null;
+
+/* ✅ Typing Effect - Text Stays Inside the Card */
+function typeEffect() {
+  if (i >= message.length) return;
+
+  const typingText = document.getElementById("typingText");
+  const char = message.charAt(i);
+
+  if (char === "\n") {
+    typingText.appendChild(document.createElement("br"));
+  } else {
+    typingText.appendChild(document.createTextNode(char));
+  }
+
+  i++;
+
+  typingTimer = setTimeout(typeEffect, 40);
+}
+
+/* 🎉 Open Surprise */
+function showWish() {
+  document.getElementById("cardPopup").style.display = "flex";
+  playMusic();
+}
+
+/* 💌 Flip Card and Start Typing Once */
+document.getElementById("card").addEventListener("click", function() {
+  if (!this.classList.contains("open")) {
+    this.classList.add("open");
+
+    if (!typingStarted) {
+      typingStarted = true;
+      typingTimer = setTimeout(typeEffect, 700);
+    }
+  }
+});
+
+/* ❌ Close Popup by Clicking Outside */
+document.getElementById("cardPopup").addEventListener("click", function(e) {
+  if (e.target === this) {
+    this.style.display = "none";
+  }
+});
+
+</script>
+
+</body>
+</html>
